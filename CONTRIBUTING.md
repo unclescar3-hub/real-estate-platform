@@ -1,178 +1,325 @@
 # Contributing to Real Estate Platform
 
-Thank you for your interest in contributing! We appreciate your effort to improve this project.
+Thank you for your interest in contributing! This document provides guidelines and instructions for contributing to this project.
 
-## 🚀 Getting Started
+## Code of Conduct
 
-1. Fork the repository
-2. Clone your fork: `git clone https://github.com/YOUR-USERNAME/real-estate-platform.git`
-3. Add upstream: `git remote add upstream https://github.com/unclescar3-hub/real-estate-platform.git`
-4. Create a feature branch: `git checkout -b feature/your-feature-name`
+Please be respectful and professional in all interactions. We are committed to providing a welcoming and inclusive environment.
 
-## 📝 Commit Guidelines
+## Getting Started
 
-We follow [Conventional Commits](https://www.conventionalcommits.org/) format:
+### Prerequisites
 
-```
-<type>(<scope>): <subject>
+- Node.js >= 16.0.0
+- npm >= 8.0.0
+- Git
+- MongoDB or PostgreSQL (for testing)
 
-<body>
+### Development Setup
 
-<footer>
-```
+1. **Fork the repository**
+   ```bash
+   Click "Fork" on GitHub
+   ```
 
-### Types
-- **feat**: A new feature
-- **fix**: A bug fix
-- **docs**: Documentation only changes
-- **style**: Changes that don't affect code meaning (formatting, etc.)
-- **refactor**: Code change that neither fixes a bug nor adds a feature
-- **perf**: Code change that improves performance
-- **test**: Adding missing tests or correcting existing tests
-- **chore**: Changes to build process, dependencies, etc.
+2. **Clone your fork**
+   ```bash
+   git clone https://github.com/YOUR-USERNAME/real-estate-platform.git
+   cd real-estate-platform
+   ```
 
-### Examples
-```
-feat(auth): add two-factor authentication
-fix(api): resolve pagination bug in property listing
-docs(readme): update installation instructions
-test(properties): add unit tests for search filter
-```
+3. **Add upstream remote**
+   ```bash
+   git remote add upstream https://github.com/unclescar3-hub/real-estate-platform.git
+   ```
 
-## 🔍 Code Quality
+4. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-Before submitting a PR:
+5. **Create `.env` file**
+   ```bash
+   cp .env.example .env
+   # Edit .env with your local settings
+   ```
+
+6. **Start development server**
+   ```bash
+   npm run dev
+   ```
+
+## Development Workflow
+
+### Creating a Branch
+
+Create a branch with a descriptive name:
 
 ```bash
-# Run linting
-npm run lint:fix
+git checkout -b feature/add-property-filters
+# or for fixes:
+git checkout -b fix/property-search-bug
+# or for documentation:
+git checkout -b docs/update-api-docs
+```
 
-# Format code
-npm run format
+Branch naming conventions:
+- `feature/` - New features
+- `fix/` - Bug fixes
+- `docs/` - Documentation
+- `refactor/` - Code refactoring
+- `test/` - Adding tests
+- `perf/` - Performance improvements
 
-# Run tests
+### Making Changes
+
+1. **Write your code** following our style guidelines
+2. **Test your changes**
+   ```bash
+   npm test
+   ```
+3. **Check linting**
+   ```bash
+   npm run lint
+   ```
+4. **Format code**
+   ```bash
+   npm run format
+   ```
+
+### Commit Messages
+
+Follow Conventional Commits format:
+
+```
+type(scope): subject
+
+body
+
+footer
+```
+
+**Types:**
+- `feat:` A new feature
+- `fix:` A bug fix
+- `docs:` Documentation changes
+- `style:` Code style changes (formatting, etc.)
+- `refactor:` Code refactoring
+- `perf:` Performance improvements
+- `test:` Adding or updating tests
+- `chore:` Build process, dependencies, etc.
+
+**Examples:**
+```
+feat(property): add image upload functionality
+fix(search): correct pagination offset calculation
+docs(readme): update installation instructions
+test(auth): add JWT verification tests
+```
+
+### Pushing Your Changes
+
+```bash
+# Keep your branch up to date
+git fetch upstream
+git rebase upstream/main
+
+# Push to your fork
+git push origin feature/your-feature
+```
+
+## Submitting a Pull Request
+
+### Before Submitting
+
+- [ ] Your code follows the style guidelines
+- [ ] All tests pass: `npm test`
+- [ ] No linting errors: `npm run lint`
+- [ ] Code is formatted: `npm run format`
+- [ ] Commits are meaningful
+- [ ] Branch is up to date with `main`
+
+### PR Description Template
+
+```markdown
+## Description
+Brief description of changes
+
+## Type of Change
+- [ ] Bug fix
+- [ ] New feature
+- [ ] Breaking change
+- [ ] Documentation update
+
+## Related Issues
+Closes #123
+
+## Testing
+Describe how you tested this change
+
+## Checklist
+- [ ] Code follows style guidelines
+- [ ] Tests added/updated
+- [ ] Documentation updated
+- [ ] No new warnings generated
+```
+
+### PR Review Process
+
+1. **Automated Checks**: CI/CD pipeline runs
+2. **Code Review**: Team reviews your code
+3. **Requested Changes**: Address feedback
+4. **Approval**: PR approved by maintainers
+5. **Merge**: Your PR is merged to main
+
+## Testing Guidelines
+
+### Unit Tests
+
+```bash
 npm test
+```
 
-# Check coverage
+Write tests for:
+- New features
+- Bug fixes
+- Edge cases
+- Error handling
+
+### Test Structure
+
+```javascript
+describe('Feature Name', () => {
+  it('should do something specific', () => {
+    // Arrange
+    const input = 'test';
+    
+    // Act
+    const result = functionUnderTest(input);
+    
+    // Assert
+    expect(result).toBe('expected');
+  });
+});
+```
+
+### Test Coverage
+
+Maintain minimum 80% coverage:
+
+```bash
 npm run test:coverage
 ```
 
-All tests must pass and code coverage should be >= 80%.
+## Code Style Guidelines
 
-## 📋 Pull Request Process
+### JavaScript/Node.js
 
-1. Update documentation if you've changed APIs or features
-2. Add tests for new functionality
-3. Ensure all tests pass: `npm test`
-4. Ensure code is properly formatted: `npm run format`
-5. Fill out the PR template completely
-6. Link related issues: `Closes #123`
+- Use ES6+ features
+- Use async/await over promises
+- Use const/let, avoid var
+- Use meaningful variable names
+- Maximum line length: 100 characters
 
-### PR Title Format
-Follow conventional commits:
-```
-feat: add property favorites feature
-fix: resolve search filter bug
-docs: update API documentation
-```
+### Comments
 
-## 🏗️ Development Workflow
+```javascript
+// Good: Explains why, not what
+const expiryTime = now + (24 * 60 * 60 * 1000); // 24 hours in milliseconds
 
-### Setting Up Development Environment
-
-```bash
-# Install dependencies
-npm install
-
-# Create .env file
-cp .env.example .env
-
-# Start development server
-npm run dev
+// Bad: States the obvious
+const x = y + 1; // add one to y
 ```
 
-### Testing Requirements
+### File Organization
 
-- Write unit tests for new functions
-- Write integration tests for API endpoints
-- Achieve at least 80% code coverage
-- Use descriptive test names
-
-```bash
-# Run specific test file
-npm test -- path/to/test.js
-
-# Run tests matching pattern
-npm test -- --testNamePattern="auth"
-
-# Debug tests
-node --inspect-brk node_modules/.bin/jest --runInBand
+```
+components/
+├── PropertyCard/
+│   ├── PropertyCard.jsx
+│   ├── PropertyCard.module.css
+│   ├── PropertyCard.test.jsx
+│   └── index.js
 ```
 
-## 📚 Documentation
+## Documentation
 
-When adding features:
-
-1. Update README.md if user-facing
-2. Add JSDoc comments to functions
-3. Update API documentation
-4. Add examples if applicable
+- Keep README.md updated
+- Add JSDoc comments for functions
+- Update API docs for new endpoints
+- Add inline comments for complex logic
 
 ### JSDoc Example
+
 ```javascript
 /**
- * Validates email address
- * @param {string} email - The email to validate
- * @returns {boolean} True if valid email format
- * @throws {Error} If email is empty
+ * Searches for properties based on criteria
+ * @param {string} location - City or address
+ * @param {number} minPrice - Minimum price filter
+ * @param {number} maxPrice - Maximum price filter
+ * @returns {Promise<Array>} Array of matching properties
+ * @throws {Error} If location is empty
  */
-function validateEmail(email) {
+async function searchProperties(location, minPrice, maxPrice) {
   // implementation
 }
 ```
 
-## 🐛 Reporting Bugs
+## Issue Guidelines
 
-Use the [Bug Report Template](https://github.com/unclescar3-hub/real-estate-platform/issues/new?template=bug_report.md):
+### Reporting Bugs
 
-- Clear, descriptive title
-- Detailed description
+**Title:** Brief, descriptive title
+
+**Description:**
 - Steps to reproduce
 - Expected behavior
 - Actual behavior
-- Screenshots (if applicable)
-- Environment details
+- Screenshots/logs (if applicable)
+- Environment (browser, OS, Node version)
 
-## ✨ Suggesting Features
+### Requesting Features
 
-Use the [Feature Request Template](https://github.com/unclescar3-hub/real-estate-platform/issues/new?template=feature_request.md):
+**Title:** Brief feature description
 
-- Clear description of the feature
-- Use cases and benefits
-- Possible implementation approach
-- Any related issues
+**Description:**
+- Problem it solves
+- Proposed solution
+- Alternative solutions considered
+- Additional context
 
-## 🔐 Security
+## Release Process
 
-If you discover a security vulnerability, please email security@example.com instead of using the issue tracker.
+1. Update version in `package.json`
+2. Update `CHANGELOG.md`
+3. Create release PR
+4. Merge to main
+5. Create GitHub release
+6. NPM publish (if applicable)
 
-## 📚 Additional Resources
+## Helpful Resources
 
-- [Project Roadmap](./ROADMAP.md)
-- [Security Policy](./SECURITY.md)
-- [Code of Conduct](./CODE_OF_CONDUCT.md)
-- [API Documentation](./docs/API.md)
+- [Node.js Best Practices](https://github.com/goldbergyoni/nodebestpractices)
+- [React Best Practices](https://react.dev/learn)
+- [Express Documentation](https://expressjs.com/)
+- [MongoDB Documentation](https://docs.mongodb.com/)
 
-## ❓ Questions?
+## Getting Help
 
-- Check existing issues and discussions
-- Ask in GitHub Discussions
-- Contact the maintainers
+- Check [existing issues](https://github.com/unclescar3-hub/real-estate-platform/issues)
+- Review [Discussions](https://github.com/unclescar3-hub/real-estate-platform/discussions)
+- Ask questions in PR comments
+- Email: dev@realestate.com
 
-## 🙏 Thank You!
+## Recognition
 
-Every contribution, no matter how small, helps make this project better. We're grateful for your support!
+Contributors are recognized in:
+- `CONTRIBUTORS.md`
+- GitHub contributors page
+- Release notes
 
 ---
 
-**Happy Contributing!** 🎉
+**Thank you for contributing!** 🙌
+
+Your efforts help make Real Estate Platform better for everyone.

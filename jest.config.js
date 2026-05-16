@@ -1,0 +1,22 @@
+export default {
+  testEnvironment: 'node',
+  coverageDirectory: 'coverage',
+  collectCoverageFrom: [
+    'src/**/*.js',
+    '!src/**/*.test.js',
+    '!src/index.js',
+  ],
+  coverageThreshold: {
+    global: {
+      branches: 80,
+      functions: 80,
+      lines: 80,
+      statements: 80,
+    },
+  },
+  testMatch: [
+    '**/__tests__/**/*.js',
+    '**/*.test.js',
+  ],
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+};
